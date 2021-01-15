@@ -1,0 +1,30 @@
+                                <!-- {{(listvalue[i] , listunit[i])|join(" ") }}  
+                                   {% if temperature > listvalue[i] %}  
+                                  <h4>bigger</h4>
+                                   <h4 style="font-size: 17px;">Open your windows, the weather is cool outside</h4>
+                                  {% else %}
+                                    <h4>Open your air conditionaire, it's hot outside </h4>
+                                  {% endif %}
+                              {% endif %}
+                            {% endfor %}
+                          {% endif %}
+                           {%endif%}
+                        {% endfor %}
+                        {%for i in range(monthlistt|length)%}
+                            {% if monthh == monthlist[i] %}
+                              {% if temperature > Temperature %}
+                                <div class="tip"><h4>The weather is good for a walk outside !</h4></div>
+                              {% else %}
+                                <div class="tip"><h4>it's a bit hotter inside, you can open your windows</h4></div>
+                              {% endif %}
+                            {%endif%}
+                          {% endfor %}
+                          {%for i in range(monthhlist|length)%}
+                           {% if monthh == monthlist[i] %}
+                              {% if temperature > Temperature %}
+                                 <div class="tip"><h4>it's hot outside, open your heater</h4></div>
+                              {% else %}
+                                <div class="tip"><h4>Open your windows,it's not that cold outside </h4></div>
+                              {% endif %}
+                            {%endif%}
+                          {% endfor %} -->

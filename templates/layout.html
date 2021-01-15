@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+
+<html>
+
+
+ <head>
+
+ <title>{% block title %} {% endblock %}</title>
+ 
+ </head>
+
+
+ <body>
+
+
+{% if session['name'] %}
+
+
+ <li>
+
+
+ <a href="/logout"></a>
+
+
+ </li>
+
+
+ {% else %}
+
+ <li>
+
+
+ <a href="/login"></a>
+
+
+ </li>
+
+
+ <li>
+
+
+ <a href="/register"></a>
+
+
+ </li>
+
+
+ {% endif %}
+
+
+ </ul>
+
+
+ </div>
+
+
+
+ </div>
+
+
+ </nav>
+
+
+
+
+{% block content %} {% endblock %}
+
+
+ <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
+
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+ </body>
+
+
+</html>

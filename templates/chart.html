@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <link rel="stylesheet" href="static/bootstrap/css/bootstrap.min.css"/>
+        <script src="static/jquery/jquery.min.js"></script>
+        <script src="static/bootstrap/js/bootstrap.min.js"></script>
+        <script src="static/chart/highcharts.js"></script>
+        <meta charset="utf-8">
+        <!--the second chart-->
+        <script src='static/chart/Chart.min.js'></script>
+        <!--the second chart-->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+      
+        <title>Home</title>
+      
+        <!-- Custom fonts for this template-->
+        <link href="static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+      
+        <!-- Custom styles for this template-->
+        <link href="static/css/sb-admin-2.min.css" rel="stylesheet">
+      
+    </head>
+      
+    <body id="page-top">
+      
+        <!-- Page Wrapper -->
+        <div id="wrapper">
+      
+          <!-- Sidebar -->
+          <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+      
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="Dashboard">
+              <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fas fa-laugh-wink"></i>
+              </div>
+              <div class="sidebar-brand-text mx-3"> Welcome </div>
+            </a>
+      
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+      
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+              <a class="nav-link" href="Dashboard">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Dashboard</span></a>
+            </li>
+      
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+      
+            <!-- Heading -->
+      
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+              <a class="nav-link collapsed" href="config" >
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Add/Exclude devices</span>
+              </a>
+            
+            </li>
+      
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+              <a class="nav-link collapsed" href="info">
+                <i class="fas fa-fw fa-wrench"></i>
+                <span>Network information</span>
+              </a>
+            </li>
+      
+      
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+              <a class="nav-link collapsed" href="scenario" >
+                <i class="fas fa-fw fa-folder"></i>
+                <span>Scenarios</span>
+              </a>
+            </li>
+      
+            <!-- Nav Item - Tables -->
+            <li class="nav-item">
+              <a class="nav-link" href="tables.html">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Log Out</span></a>
+            </li>
+      
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+      
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+              <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+      
+          </ul>
+          <!-- End of Sidebar -->
+      
+          <!-- Content Wrapper -->
+          <div id="content-wrapper" class="d-flex flex-column">
+      
+            <!-- Main Content -->
+            <div id="content">
+      
+              <!-- Topbar -->
+              <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+      
+                <!-- Sidebar Toggle (Topbar) -->
+                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                  <i class="fa fa-bars"></i>
+                </button>
+      
+                <!-- Topbar Search -->
+                <!-- Topbar Navbar -->
+                  <!-- Nav Item - User Information -->
+                  <li class="nav-item dropdown no-arrow" style="margin-left: 980px;">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ name }}</span>
+                      <img src="https://img.icons8.com/flat_round/64/000000/home--v1.png" style="margin-right: 5px;margin-top: -25px;"/>
+                    </a>
+                    <!-- Dropdown - User Information -->
+             
+                  </li>
+                
+              </nav>
+<!-- body of the second chart -->
+<h1>Temperature Sensor #1</h1>
+    <!-- bar chart canvas element -->
+    <canvas id="myChart" width="600" height="400"></canvas>
+    <p id="pointSelected">Point selected:</p>
+
+    <script>
+      // Global parameters:
+      // do not resize the chart canvas when its container does (keep at 600x400px)
+      Chart.defaults.global.responsive = false;
+
+      // define the chart data
+      var chartData = {
+        labels : [{% for item in labels_chart2 %}
+                   "{{item}}",
+                  {% endfor %}],
+        datasets : [{
+            label: '{{ legend }}',
+            fill: true,
+            lineTension: 0.1,
+            backgroundColor: "rgba(75,192,192,0.4)",
+            borderColor: "rgba(75,192,192,1)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(75,192,192,1)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(75,192,192,1)",
+            pointHoverBorderColor: "rgba(220,220,220,1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data : [{% for item in values_chart2 %}
+                      {{item}},
+                    {% endfor %}],
+            spanGaps: false
+        }]
+      }
+
+      // get chart canvas
+      var holder = document.getElementById("myChart");
+      var ctx = document.getElementById("myChart").getContext("2d");
+
+      // create the chart using the chart canvas
+      var myChart = new Chart(ctx, {
+        type: 'line',
+        data: chartData,
+        options: {
+          tooltips: {
+            enabled: true,
+            mode: 'single',
+            callbacks: {
+              label: function(tooltipItems, data) {
+                       return tooltipItems.yLabel + ' degrees';
+                     }
+            }
+          },
+        }
+      });
+
+      // get the text element below the chart
+      var pointSelected = document.getElementById("pointSelected");
+
+      // create a callback function for updating the selected index on the chart
+      holder.onclick = function(evt){
+        var activePoint = myChart.getElementAtEvent(evt);
+        console.log(activePoint);
+        console.log('x:' + activePoint[0]._view.x);
+        console.log('maxWidth: ' + activePoint[0]._xScale.maxWidth);
+        console.log('y: ' + activePoint[0]._view.y);
+        console.log('index: ' + activePoint[0]._index);
+        pointSelected.innerHTML = 'Point selected... index: ' + activePoint[0]._index;
+      };
+    </script>
+
+              
+
+
+
+
+
+<!-- end of the second chart-->
+              <div class="container-fluid">
+      
+                  <!-- Page Heading -->
+                  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">charts</h1>
+                  </div>
+
+                <div id="container"></div>
+                <script>
+                    Highcharts.chart('container', {
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: ' Average Temperature '
+                },
+                subtitle: {
+                    text: 'Source: Motion sensor '
+                },
+                xAxis: {
+                    categories: [ 
+                        {% for item in labels %}
+                        "{{ item }}",
+                        {% endfor %}]
+                    },
+                yAxis: {
+                    title: {
+                        text: 'Temperature (°C)'
+                    }
+                },
+                plotOptions: {
+                    line: {
+                        dataLabels: {
+                            enabled: true
+                        },
+                        enableMouseTracking: false
+                    }
+                },
+                series: [{
+                    name: 'T',
+                    data: [{% for item in values %}
+                        {{ item }},
+                        {% endfor %}]
+                }]
+            });
+                </script>
+                    
+                </body>
+
+
+
+
+
+                <script src="static/vendor/jquery/jquery.min.js"></script>
+                <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+              
+                <!-- Core plugin JavaScript-->
+                <script src="static/vendor/jquery-easing/jquery.easing.min.js"></script>
+              
+                <!-- Custom scripts for all pages-->
+                <script src="static/js/sb-admin-2.min.js"></script>
+              
+                <!-- Page level plugins -->
+                <script src="static/vendor/chart.js/Chart.min.js"></script>
+              
+                <!-- Page level custom scripts -->
+                <script src="static/js/demo/chart-area-demo.js"></script>
+                <script src="static/js/demo/chart-pie-demo.js"></script>
+</html>

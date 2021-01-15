@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+  {% if title %}
+  <title>{{ title }} - Configuration </title>
+  {% else %}
+  <title>Welcome to your Home automation </title>
+  {% endif %}
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="static/css/style.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/static/css/main.css">
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+      <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
+      <span class="w3-bar-item w3-right">Z-WAVE Home Automation </span>
+    </div>
+  <div class="wrapper d-flex align-items-stretch">
+    <nav id="sidebar" class="active" style="margin-top: 30px; position: fixed;height: 1000px;">
+      <h1><a href="index.html" class="logo"> </a></h1>
+      <ul class="list-unstyled components mb-5">
+        <li class="active">
+          <a href="Dashboard"><span class="fa fa-home"></span> Dashboard</a>
+        </li>
+        <li>
+            <a href="info"><span class="fa fa-user"></span> Network </a>
+        </li>
+        <li>
+          <a href="config"><span class="fa fa-cogs"></span> Add/Exlude devices</a>
+        </li>
+        <li>
+          <a href="scenario"><span class="fa fa-bullseye fa-fw" style="margin-left:30px"></span> Scenarios</a>
+        </li>
+        <li>
+          <a href="logout"><span class="fa fa-paper-plane"></span> Log out</a>
+        </li>
+      </ul>
+
+    </nav>
+
+      <!-- Page Content  -->
+    <div id="content" class="p-4 p-md-5" >
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-left: 100px;">
+        <div class="container-fluid" >
+          
+          <button type="button" id="sidebarCollapse" class="btn btn-primary" >
+            <i class="fa fa-bars"></i>
+            <span class="sr-only">Toggle Menu</span>
+          </button>
+          <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <i class="fa fa-bars"></i>
+          </button>
+           <h3 style="position: absolute; margin-left: 45px; ">You can add any device you want by pressing the ADD button below! Enjoy automating Your Home !
+        </div>
+      </nav>
+
+      <h2 class="mb-4"></h2>
+      
+    </div>
+  </div>
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:70px;margin-top:-530px;">
+
+  <!-- Header -->
+  <body>
+    <div class="container">
+     <div class="row" style="margin-top: 50px;">
+      <p><h4>The devices existing in the system  </h4></p><img src="https://img.icons8.com/fluent/48/000000/usb-2.png" style="height: 40px; margin-left: 8px;"/><h4> : </h4> 
+
+     <table class="table" style="margin-top: 20px;">
+      <thead class="thead-light">
+        <tr>
+            <th scope="col"></th>
+          <th scope="col">Device Name :</th>
+          <th scope="col">Node Id :</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for i in range(Nameslist| length) %}
+            <tr>
+              <th scope="row"></th>
+              <td>{{Nameslist[i]}}</td>
+              <td>{{Nodeidlist[i]}}</td>
+            </tr>
+          {%endfor%}
+      
+
+      </tbody>
+    </table>
+
+
+    </div>
+    <br>
+    <br>
+    <h4>If you want to add or to exclude a device, please press on the following buttons, simultaneously, press 3 times on the button existing at the back of your device and wait for 30 seconds !</h4> 
+    <form action="/config" method="POST"  >
+    <!--onclick="sweetalertclick()"-->
+    <input type="submit" name="submit_button" value="Add a new device" class="button button1" style="margin-left: 320px;">
+    <input type="submit" name="submit_button" value="Exclude a device" class="button button1" >
+    </form>
+    <br>
+    <h4 style="margin-top: 20px;"> In case your device is not detected please redo the same processus ! </h4>
+    <br>
+    <!--<h4> REFRESH : Number of devices in the system are : {{action}} </h4> -->
+ 
+      
+    </form >
+<!--
+    <h1>if you want to add a new the device please press Yes </h1> 
+    <form action= ». » method= »POST »>
+      <input type= »text » name= »text »> <button type= »submit »>YES</button> 
+    </form>
+    <h3> nomber of devices in the systeme : {{action}}</h3> -->
+        
+  </div> 
+  
+<body>
+  
+  <!--<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>-->
+  <script>    
+    //   function sweetalertclick(){
+    //     let timerInterval
+    //     Swal.fire({
+    //       title: 'Waiting for the device to be included!',
+    //       html: 'Finish in <b></b> seconds.',
+    //       timer: 60000,
+    //       timerProgressBar: true,
+    //       onBeforeOpen: () => {
+    //         Swal.showLoading()
+    //         timerInterval = setInterval(() => {
+    //           const content = Swal.getContent()
+    //           if (content) {
+    //             const b = content.querySelector('b')
+    //             if (b) {
+    //               b.textContent = Math.ceil(Swal.getTimerLeft() / 1000)
+                  
+    //             }
+    //           }
+    //         }, 100)
+    //       },
+    //       onClose: () => {
+    //         clearInterval(timerInterval)
+    //       }
+    //     }).then((result) => {
+    //       /* Read more about handling dismissals below */
+    //       if (result.dismiss === Swal.DismissReason.timer) {
+    //         console.log('I was closed by the timer')
+    //       }
+    //     })
+
+    //  }
+</script>
+
+<style>
+
+
+table{
+    width:100%;
+}
+#example_filter{
+    float:right;
+}
+#example_paginate{
+    float:right;
+}
+label {
+    display: inline-flex;
+    margin-bottom: .5rem;
+    margin-top: .5rem;
+    
+}
+.page-item.disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+    cursor: auto;
+    background-color: #fff;
+    border-color: #dee2e6;
+}
+
+.button {
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: -30px 2px;
+  margin-top: 40px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button1  {
+  background-color: white; 
+  color: black; 
+  border: 2px solid black;
+}
+
+.button1:hover {
+  background-color: cornflowerblue;
+  color: white;
+}
+form h3{
+    margin-top: 60px;
+    color: black;
+}
+
+
+</style>   
+        
+    </body>
+
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+    <script>
+        // Get the Sidebar
+        var mySidebar = document.getElementById("mySidebar");
+        
+        // Get the DIV with overlay effect
+        var overlayBg = document.getElementById("myOverlay");
+        
+        // Toggle between showing and hiding the sidebar, and add overlay effect
+        function w3_open() {
+          if (mySidebar.style.display === 'block') {
+            mySidebar.style.display = 'none';
+            overlayBg.style.display = "none";
+          } else {
+            mySidebar.style.display = 'block';
+            overlayBg.style.display = "block";
+          }
+        }
+        
+        // Close the sidebar with the close button
+        function w3_close() {
+          mySidebar.style.display = "none";
+          overlayBg.style.display = "none";
+        }
+
+        </script>
+        <script src="/static/JS/main.js"> </script>
+</html>
